@@ -148,8 +148,9 @@ def is_dupliacted(rarity_dict, trait_sets, count):
     for index in range(count):
         diff_count = 0
         for idx, trait in enumerate(trait_sets):
-            if rarity_dict[CONFIG[idx]['name']][index] != trait[: -1 * len('.png')]:
-                diff_count += 1
+            if trait:
+                if rarity_dict[CONFIG[idx]['name']][index] != trait[: -1 * len('.png')]:
+                    diff_count += 1
         
         if diff_count == 0:
             return True
@@ -177,6 +178,7 @@ def generate_images(edition, count, drop_dup=True):
     # Create the images
     image_index = 0
     while image_index < count:
+        print("Generating image", image_index, " of ", count, end='\r')
         # Set image name
         image_name = str(image_index).zfill(zfill_count) + '.png'
         
